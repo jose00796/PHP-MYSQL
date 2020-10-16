@@ -14,12 +14,10 @@ class conexion
 
         try {
             $this->connect = new PDO($conectionstring, $this->user, $this->pass);
-            $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);//FUNCIONA PARA TENER UNA DESCRIPCION DE POSIBLES ERRORES DE CONEXION.
         } catch (Exception $e) {
             $this->connect = "ERROR DE CONEXION";
             echo "Error = ".$e->getMessage();
         }
     }
 }
-
-$connect = new conexion();
