@@ -10,6 +10,7 @@ class usuario extends conexion
     public function __construct()
     {
         $this->conection = new conexion();
+        $this->conection = $this->conection->connect();
     }
 
     public function InsertarUsuario($nombre, $telef, $email)
@@ -18,6 +19,11 @@ class usuario extends conexion
         $this->telef = $telef;
         $this->email = $email;
 
-        $sql = "INSERT INTO usuario (nombre, telefono, email) VALUE ($this->nombre, $this->telef, $this->email)";
+        $sql = "INSERT INTO usuario (nombre, telefono, email) VALUE (?,?,?)";
+        $insert = $this->conection->prepare($sql);
+        $arrayData = array($this->nombre, $this->telef, $this->email);
+        $resInsert = $insert->execute($arrayData);
+        $idInsert = $this->conection->lastInsertid();
+        return $idInsert;
     }
 }

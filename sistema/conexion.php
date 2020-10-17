@@ -20,4 +20,9 @@ class conexion
             echo "Error = ".$e->getMessage();
         }
     }
+
+    public function connect()
+    {
+        return $this->connect;
+    }
 }
