@@ -34,4 +34,17 @@ class usuario extends conexion
         $request = $execute->fetchall(PDO::FETCH_ASSOC);
         return $request;
     }
+
+    public function updateUsuario($id ,$nombre, $telef, $email)
+    {
+        $this->nombre = $nombre;
+        $this->telef = $telef;
+        $this->email = $email;
+
+        $sql = "UPDATE usuario SET nombre = ?, telefono = ?, email = ? WHERE id = $id";
+        $update = $this->conection->prepare($sql);
+        $arrayUpdate = arraY($this->nombre, $this->telef, $this->email);
+        $resExecute = $update->execute($arrayUpdate);
+        return $resExecute;
+    }
 }
