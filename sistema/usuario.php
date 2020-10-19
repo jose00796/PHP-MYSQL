@@ -26,4 +26,12 @@ class usuario extends conexion
         $idInsert = $this->conection->lastInsertid();
         return $idInsert;
     }
+
+    public function getUsuarios()
+    {
+        $sql = "SELECT * FROM usuario";
+        $execute = $this->conection->query($sql);
+        $request = $execute->fetchall(PDO::FETCH_ASSOC);
+        return $request;
+    }
 }
