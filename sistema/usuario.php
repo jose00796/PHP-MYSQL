@@ -31,7 +31,7 @@ class usuario extends conexion
     {
         $sql = "SELECT * FROM usuario";
         $execute = $this->conection->query($sql);
-        $request = $execute->fetchall(PDO::FETCH_ASSOC);
+        $request = $execute->fetchall(PDO::FETCH_ASSOC);//Fetchall->Permite traer mas de un registro.
         return $request;
     }
 
@@ -46,5 +46,24 @@ class usuario extends conexion
         $arrayUpdate = arraY($this->nombre, $this->telef, $this->email);
         $resExecute = $update->execute($arrayUpdate);
         return $resExecute;
+    }
+
+    public function GetUser($id)
+    {
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $arrayWhere = array($id);
+        $query = $this->conection->prepare($sql);
+        $query->execute($arrayWhere);
+        $request = $query->fetch(PDO::FETCH_ASSOC);//Fetch->Permite obtener un solo registro en especifico.
+        return $request;
+    }
+
+    public function DelUser($id)
+    {
+        $sql = "DELETE FROM usuario WHERE id = ?";
+        $delete = $this->conection->prepare($sql);
+        $arrayWhere = array($id);
+        $del = $delete->execute($arrayWhere);
+        return $del;
     }
 }
